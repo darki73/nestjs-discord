@@ -1,6 +1,7 @@
 import { ModuleOptionsSettingsInterface } from './module.options.settings.interface';
 import { ModuleOptionsChannelsInterface } from './module.options.channels.interface';
 import { ModuleOptionsGuildsInterface } from './module.options.guilds.interface';
+import { ModuleOptionsManagementInterface } from './module.options.management.interface';
 import { ModuleOptionsWebhookInterface } from './module.options.webhook.interface';
 
 /**
@@ -25,6 +26,12 @@ export interface ModuleOptionsInterface {
      * @type { ModuleOptionsGuildsInterface | undefined }
      */
     guilds?: ModuleOptionsGuildsInterface;
+
+    /**
+     * Management configuration for bot
+     * @type { ModuleOptionsManagementInterface | undefined }
+     */
+    management?: ModuleOptionsManagementInterface;
 
     /**
      * Webhook configuration for bot
