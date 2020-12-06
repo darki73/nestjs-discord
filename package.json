@@ -1,0 +1,100 @@
+{
+    "license": "MIT",
+    "name": "nestjs-discord",
+    "description": "NestJS package for discord.js",
+    "version": "0.0.1",
+    "author": {
+        "name": "Zhivolupov Ivan",
+        "url": "https://freedomcore.ru",
+        "email": "ivan.zhivolupov@freedomcore.ru"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/darki73/nestjs-discord"
+    },
+    "bugs": {
+        "url": "https://github.com/darki73/nestjs-discord/issues",
+        "email": "nestjs-discord-bugs@freedomcore.ru"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "files": [
+        "dist/**/*",
+        "*.md"
+    ],
+    "scripts": {
+        "prebuild": "rimraf dist",
+        "build": "nest build",
+        "format": "prettier --write \"src/**/*.ts\" ",
+        "start": "nest start",
+        "start:dev": "nest start --watch",
+        "start:debug": "nest start --debug --watch",
+        "start:prod": "node dist/main",
+        "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage",
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+        "test:e2e": "jest --config ./test/jest-e2e.json"
+    },
+    "devDependencies": {
+        "@nestjs-plus/discovery": "^2.0.2",
+        "@nestjs/cli": "^7.5.3",
+        "@nestjs/common": "^7.5.5",
+        "@nestjs/core": "^7.5.5",
+        "@nestjs/schematics": "^7.2.2",
+        "@types/node": "^14.14.10",
+        "@types/uuid": "^8.3.0",
+        "@typescript-eslint/eslint-plugin": "^4.9.0",
+        "@typescript-eslint/parser": "^4.9.0",
+        "discord.js": "^12.5.1",
+        "eslint": "^7.14.0",
+        "eslint-config-prettier": "^6.15.0",
+        "eslint-plugin-import": "^2.22.1",
+        "husky": "^4.3.0",
+        "lint-staged": "^10.5.2",
+        "prettier": "^2.2.1",
+        "reflect-metadata": "^0.1.13",
+        "rimraf": "^3.0.2",
+        "rxjs": "^6.6.3",
+        "ts-loader": "^8.0.11",
+        "ts-node": "^9.1.0",
+        "tsconfig-paths": "^3.9.0",
+        "typescript": "^4.1.2",
+        "uuid": "^8.3.1"
+    },
+    "peerDependencies": {
+        "@nestjs/common": "^7.5.5",
+        "@nestjs/core": "^7.5.5",
+        "discord.js": "^12.5.1",
+        "reflect-metadata": "^0.1.13",
+        "rxjs": "^6.6.3"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.ts": [
+            "prettier --write"
+        ]
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "lib",
+        "testRegex": ".spec.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "coverageDirectory": "../coverage",
+        "testEnvironment": "node"
+    }
+}
