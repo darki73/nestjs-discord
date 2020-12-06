@@ -10,35 +10,36 @@ export interface CommandInterface {
      * @type { boolean }
      * @default true
      */
-    enabled: boolean;
+    readonly enabled: boolean;
 
     /**
      * Command name
      * @type { string }
      */
-    name: string;
+    readonly name: string;
 
     /**
      * Command description
      * @type { string | undefined }
      */
-    description?: string;
+    readonly description?: string;
 
     /**
      * Command aliases
      * @type { string[] }
      */
-    aliases: string[];
+    readonly aliases: string[];
 
     /**
      * Command category
      * @type { string | undefined }
      */
-    category?: string;
+    readonly category?: string;
 
     /**
      * List of command parameters
+     * @type { CommandParameterInterface[] }
      */
-    parameters: CommandParameterInterface[];
+    readonly parameters: CommandParameterInterface[];
 
 }

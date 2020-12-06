@@ -19,6 +19,7 @@ export interface CommandParameterInterface {
 
     /**
      * Parameter type
+     * @type { ParameterType }
      * @default string
      */
     type: ParameterType
