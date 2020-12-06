@@ -3,7 +3,8 @@ import { Client, WebhookClient } from 'discord.js';
 import {
     ModuleOptionsChannelsInterface,
     ModuleOptionsGuildsInterface,
-    ModuleOptionsInterface, ModuleOptionsManagementInterface,
+    ModuleOptionsInterface,
+    ModuleOptionsManagementInterface,
     ModuleOptionsSettingsInterface,
     ModuleOptionsWebhookInterface
 } from '../interfaces';
