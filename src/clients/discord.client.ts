@@ -1,10 +1,10 @@
 import { Injectable, OnApplicationBootstrap } from '@nestjs/common';
-import { Client } from 'discord.js';
+import { Client, WebhookClient } from 'discord.js';
 import {
     ModuleOptionsChannelsInterface,
     ModuleOptionsGuildsInterface,
     ModuleOptionsInterface,
-    ModuleOptionsSettingsInterface
+    ModuleOptionsSettingsInterface, ModuleOptionsWebhookInterface
 } from '../interfaces';
 
 @Injectable()
@@ -30,6 +30,20 @@ export class DiscordClient extends Client implements OnApplicationBootstrap {
     private readonly _guilds: ModuleOptionsGuildsInterface;
 
     /**
+     * Module webhook settings object
+     * @type { ModuleOptionsWebhookInterface | undefined }
+     * @private
+     */
+    private readonly _webhook?: ModuleOptionsWebhookInterface;
+
+    /**
+     * Webhook client instance
+     * @type { WebhookClient | undefined }
+     * @private
+     */
+    private _webhookClient?: WebhookClient;
+
+    /**
      * DiscordClient constructor
      * @param { ModuleOptionsInterface } options
      */
@@ -38,12 +52,14 @@ export class DiscordClient extends Client implements OnApplicationBootstrap {
             settings,
             guilds,
             channels,
+            webhook,
             ...discordOptions
         } = options;
         super(discordOptions);
         this._settings = settings;
         this._channels = channels ?? { allowed: [], ignored: [] };
         this._guilds = guilds ?? { allowed: [], ignored: [] };
+        this._webhook = webhook;
     }
 
     /**
@@ -53,6 +69,7 @@ export class DiscordClient extends Client implements OnApplicationBootstrap {
     async onApplicationBootstrap(): Promise<void> {
         // await this.login(this.settings.token);
         console.log(this);
+        this.initializeWebhookClient();
     }
 
     /**
@@ -69,6 +86,14 @@ export class DiscordClient extends Client implements OnApplicationBootstrap {
      */
     public botOwner(): string {
         return this._settings.owner_id;
+    }
+
+    /**
+     * Get webhook client instance
+     * @return { WebhookClient | undefined }
+     */
+    public webhookClient(): WebhookClient|undefined {
+        return this._webhookClient;
     }
 
     /**
@@ -126,6 +151,21 @@ export class DiscordClient extends Client implements OnApplicationBootstrap {
             return false;
         }
         return this._guilds.ignored.includes(guildID);
+    }
+
+    /**
+     * Initialize webhook client if it is configured by the user
+     * @return { void }
+     * @private
+     */
+    private initializeWebhookClient(): void {
+        if (this._webhook) {
+            this._webhookClient = new WebhookClient(
+                this._webhook.id,
+                this._webhook.token,
+                this._webhook.options ?? {}
+            );
+        }
     }
 
 }
